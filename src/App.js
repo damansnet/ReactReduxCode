@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
+import Container from './layouts/Container';
+import Header from './layouts/Container';
 import logo from './logo.svg';
 import './App.css';
 import EmployeeListing from './components/employees/employeeslist';
+import CompanyInfoBar from './components/companyinfo/companyinfobar';
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          
+        <Header>
+          <CompanyInfoBar></CompanyInfoBar>
+        </Header>
+         <Container>
+         
           <EmployeeListing></EmployeeListing>
           
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          </Container>
+        
       </div>
     );
   }
