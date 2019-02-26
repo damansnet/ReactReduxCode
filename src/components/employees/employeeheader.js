@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as employeeActions from './action';
-import EmployeeHeader from './employeeheader';
 
 
-export class EmployeeListing extends Component {
+export class EmployeeHeader extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -30,10 +29,16 @@ export class EmployeeListing extends Component {
     render(){
         const {employees}=this.props.employees;
         console.log(employees);
-        return(<div>
-            <EmployeeHeader></EmployeeHeader>
-         employees
-        </div>);
+        return(<div className="container">
+        <div className="col-xs-5 col-lg-1">
+        <select className="form-control  pull-right" >
+     
+    </select>
+    </div>
+    <div className="col-xs-5 col-lg-1">
+        <input type="text" className="form-control  pull-right" placeholder="Search.." />
+        </div>
+      </div>);
     }
 }
 export const mapStateToProps = state => {
@@ -42,4 +47,4 @@ export const mapStateToProps = state => {
      employees,fetchEmployees
     };
   };
-export default connect(mapStateToProps,employeeActions)(EmployeeListing);
+export default connect(mapStateToProps,employeeActions)(EmployeeHeader);
