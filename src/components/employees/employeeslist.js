@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as employeeActions from './action';
 import EmployeeHeader from './employeeheader';
+import styled from 'styled-components';
+import EmployeeCardView from './employeecardview';
+import EmployeeDetails from './employeedetails';
+const ImagePlaceholder= styled.div`
+  
+  float:left;
+`;
 
 
 export class EmployeeListing extends Component {
@@ -10,7 +17,7 @@ export class EmployeeListing extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-         
+         show:false
         };
     }
     componentWillMount() {
@@ -21,19 +28,35 @@ export class EmployeeListing extends Component {
           const{employees,fetchEmployees}=nextProps; 
           if(employees!==undefined && fetchEmployees===false)
           {
-             // this.setState({employees});
+              this.setState({employees});
               this.props.getEmployeesCompleted();
               return;
           }
        console.log(nextProps);  
     }
+
+    selectedEmployee=(selectedEmployee)=>{
+        
+        this.setState({show:true,selectedEmployee});
+    }
+     hideModal=()=>{
+         this.setState({show:!this.state.show});
+     };
     render(){
-        const {employees}=this.props.employees;
+        const {employees,show,selectedEmployee}=this.state;
         console.log(employees);
-        return(<div>
+         return( <div className="container-fluid">
+                 <div className="row">
             <EmployeeHeader></EmployeeHeader>
-         employees
-        </div>);
+            </div>
+            <EmployeeCardView data={employees} selectEmployee={this.selectedEmployee} ></EmployeeCardView>
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button>
+            <EmployeeDetails show={show} data={selectedEmployee} onBackdropClick={this.hideModal}></EmployeeDetails>
+        </div>
+        
+       );
     }
 }
 export const mapStateToProps = state => {

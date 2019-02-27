@@ -27,6 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "react-bootstrap4-modal": "^1.7.0",
     "styled-components": "^4.1.3"
   }
 }

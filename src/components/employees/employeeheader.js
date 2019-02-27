@@ -29,15 +29,19 @@ export class EmployeeHeader extends Component {
     render(){
         const {employees}=this.props.employees;
         console.log(employees);
-        return(<div className="container">
-        <div className="col-xs-5 col-lg-1">
-        <select className="form-control  pull-right" >
-     
-    </select>
-    </div>
-    <div className="col-xs-5 col-lg-1">
-        <input type="text" className="form-control  pull-right" placeholder="Search.." />
-        </div>
+        return(<div className="container-fluid">
+         <div className="row">
+          <div className="col">
+          <p className="text-left">Employees</p>
+          </div>
+          <div className="col">
+          <span>Sorty by</span>
+          <span className="text-right">dropdowncomes here</span>
+          </div>
+          <div className="col">
+          <p className="text-right"> <input type='text' placeholder="search"></input>  </p>
+          </div>
+         </div>
       </div>);
     }
 }
