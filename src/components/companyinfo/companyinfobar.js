@@ -37,20 +37,28 @@ export class CompanyInfoBar extends Component {
         // console.log(employees);
         return(
            <ContainerFluid>
-<nav className="navbar navbar-inverse border-bottom">
+
   <div className="container-fluid">
-    <div className="navbar-header">
      <div className="row">
-     <div className="col-xl">
-              <h4 class="text-black">CompanyName</h4>
-              <p class="text-muted">company moto.</p>
+     <div className="col">
+              <h4 class="text-black  text-left">CompanyName</h4>
+     
             </div>
      </div>
+     <div className="row">
+     <div className="col">
+              <h6 class="text-black text-left">CompanyMoto</h6>
+     
+            </div>
+            <div className="col pull-right">
+              <h6 class="text-black text-right">working since..</h6>
+     
+            </div>
+     </div>
+
+
     </div>
-    
-    </div>
-    <hr/>
-    </nav>
+     
     </ContainerFluid>
         );
     }
