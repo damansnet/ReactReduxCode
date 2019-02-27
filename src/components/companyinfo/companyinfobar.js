@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from "styled-components";
+import Container from '../../layouts/Container';
+import Header from '../../layouts/Container';
+import EmployeeListing from '../employees/employeeslist';
 const ContainerFluid = styled.div`
 
 `;
@@ -17,41 +20,37 @@ export class CompanyInfoBar extends Component {
         this.state = {
          
         };
+        this.showCompanyInfo=this.showCompanyInfo.bind(this);
     }
     componentWillMount() {
-       // this.props.getEmployees();
+      
       }
       componentWillUpdate(nextProps) {
-         
-    //       const{employees,fetchEmployees}=nextProps; 
-    //       if(employees!==undefined && fetchEmployees===false)
-    //       {
-    //          // this.setState({employees});
-    //           this.props.getEmployeesCompleted();
-    //           return;
-    //       }
-    //    console.log(nextProps);  
+      
+    }
+    showCompanyInfo(companyInfo){
+        this.setState({companyInfo});
     }
     render(){
-        // const {employees}=this.props.employees;
-        // console.log(employees);
-        return(
+        const{companyInfo}=this.state;
+        return(<div>
+            <Header>
            <ContainerFluid>
 
   <div className="container-fluid">
      <div className="row">
      <div className="col">
-              <h4 class="text-black  text-left">CompanyName</h4>
+              <h1 className="text-black  text-left">{(companyInfo)?companyInfo.companyName:''}</h1>
      
             </div>
      </div>
      <div className="row">
      <div className="col">
-              <h6 class="text-black text-left">CompanyMoto</h6>
+              <h6 class="text-black text-left">{(companyInfo)?companyInfo.companyMotto:''}</h6>
      
             </div>
             <div className="col pull-right">
-              <h6 class="text-black text-right">working since..</h6>
+              <h6 class="text-black text-right">Since {(companyInfo)?  companyInfo.companyEst:''}</h6>
      
             </div>
      </div>
@@ -60,6 +59,12 @@ export class CompanyInfoBar extends Component {
     </div>
      
     </ContainerFluid>
+    </Header>
+     <Container>
+         
+     <EmployeeListing companyInfo={this.showCompanyInfo} ></EmployeeListing>
+     
+     </Container></div>
         );
     }
 }

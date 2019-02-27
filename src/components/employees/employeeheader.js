@@ -32,7 +32,7 @@ export class EmployeeHeader extends Component {
         return(<div className="container-fluid">
          <div className="row">
           <div className="col">
-          <p className="text-left">Employees</p>
+          <p className="text-left"><h3> Our Employees</h3></p>
           </div>
           <div className="col">
           <span>Sorty by</span>

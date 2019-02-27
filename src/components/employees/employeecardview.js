@@ -32,11 +32,11 @@ export class EmployeeCardView extends Component {
                 <div className="card"  onClick={()=>this.showModal(selectEmployee)} >
                 <div className="card-body text-center">
                    <ImagePlaceholder>
-                   <p><img className=" img-fluid" src="https://s3.amazonaws.com/uifaces/faces/twitter/artem_kostenko/128.jpg" alt="card image"/></p>
+                   <p><img className=" img-fluid" src={selectEmployee.avatar} alt="card image"/></p>
                    </ImagePlaceholder>
                     
-                    <h4 className="card-title"><b>First Name lastName</b></h4>
-                    <p className="card-text">Dolores alias error alias doloribus a. Beatae fuga ut sequi molestiae in fuga voluptates rerum. Ex voluptatem quisquam. Non quasi non eveniet.</p>
+                    <h4 className="card-title"><b>{selectEmployee.firstName} {selectEmployee.lastName}</b></h4>
+                    <p className="card-text">{selectEmployee.bio}</p>
                     
                 </div>
             </div>
