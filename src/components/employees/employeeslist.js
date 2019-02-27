@@ -30,6 +30,7 @@ export class EmployeeListing extends Component {
           {
               this.setState({employees});
               this.props.getEmployeesCompleted();
+              this.props.companyInfo(employees.companyInfo);
               return;
           }
        console.log(nextProps);  
@@ -43,16 +44,15 @@ export class EmployeeListing extends Component {
          this.setState({show:!this.state.show});
      };
     render(){
-        const {employees,show,selectedEmployee}=this.state;
+        const {employees,show,selectedEmployee,companyInfo}=this.state;
         console.log(employees);
          return( <div className="container-fluid">
                  <div className="row">
             <EmployeeHeader></EmployeeHeader>
+            <hr/>
             </div>
             <EmployeeCardView data={employees} selectEmployee={this.selectedEmployee} ></EmployeeCardView>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>
+            
             <EmployeeDetails show={show} data={selectedEmployee} onBackdropClick={this.hideModal}></EmployeeDetails>
         </div>
         
