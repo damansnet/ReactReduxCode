@@ -27,7 +27,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "react-bootstrap4-modal": "^1.7.0",
+    "react-moment": "^0.8.4",
     "styled-components": "^4.1.3"
   }
 }
