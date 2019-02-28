@@ -1,3 +1,3 @@
 import { combineReducers } from 'redux';
-import form from './components/employees/reducer';
+import form from './components/reducers/reducer';
 export default combineReducers({ form });

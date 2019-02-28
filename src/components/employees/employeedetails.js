@@ -30,14 +30,16 @@ export class EmployeeDetails extends Component {
     return (
         <Modal visible={this.props.show} dialogClassName="modal-lg" onClickBackdrop={this.props.onBackdropClick}>
         <div className="modal-header">
-        
+          Employee Details  <button type="button" class="close" aria-label="Close" onClick={this.props.closeModal}>
+  <span aria-hidden="true">&times;</span>
+</button> 
         </div>
         <div className="modal-body">
-        <div className="container">
+        <div className="container-fluid">
            <div className="row">
             <div className="col">
             <ImagePlaceholder>
-            <p><img className=" img-fluid" src={(data)?data.avatar:''} alt="card image"/></p>
+            <p><img  src={(data)?data.avatar:''} alt="card image"/></p>
             <p className="text-left"><BoldText>{(data)?data.jobTitle:''}</BoldText></p>
             <p className="text-left">{(data)?data.age:''}</p>
             <p className="text-left">{(data)?moment(data.dateJoined).format('ddd D MMM YYYY'):''}</p>
