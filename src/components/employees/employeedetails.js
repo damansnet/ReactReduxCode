@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap4-modal';
 import styled from 'styled-components';
+import moment from 'moment'
 const ImagePlaceholder= styled.div`
   
   float:left;
 `;
-
+const BoldText=styled.b`
+ width:135px;
+ word-wrap: break-word;
+`;
 export class EmployeeDetails extends Component {
 
     constructor(props, context) {
@@ -34,13 +38,13 @@ export class EmployeeDetails extends Component {
             <div className="col">
             <ImagePlaceholder>
             <p><img className=" img-fluid" src={(data)?data.avatar:''} alt="card image"/></p>
-            <p>{(data)?data.jobTitle:''}</p>
-            <p>{(data)?data.age:''}</p>
-            <p>{(data)?data.dateJoined:''}</p>
+            <p className="text-left"><BoldText>{(data)?data.jobTitle:''}</BoldText></p>
+            <p className="text-left">{(data)?data.age:''}</p>
+            <p className="text-left">{(data)?moment(data.dateJoined).format('ddd D MMM YYYY'):''}</p>
             </ImagePlaceholder>
             <p><b>{(data)?data.firstName+' '+data.lastName:''}</b></p>
             <p><hr/></p>
-            <p><b>{(data)?data.bio:''}</b></p>
+            <p className="text-left">{(data)?data.bio:''}</p>
             </div>
            </div>
         </div>

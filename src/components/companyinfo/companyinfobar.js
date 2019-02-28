@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Container from '../../layouts/Container';
 import Header from '../../layouts/Container';
 import EmployeeListing from '../employees/employeeslist';
+import moment from 'moment'
 const ContainerFluid = styled.div`
 
 `;
@@ -12,6 +13,18 @@ const ContainerFluid = styled.div`
 const NavBarHeader = styled.header`
 
 
+`;
+const Hr= styled.hr`
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+    border-style: solid none;
+    border-width: 1px 0;
+    margin: 18px 0;
+ 
 `;
 export class CompanyInfoBar extends Component {
 
@@ -50,12 +63,12 @@ export class CompanyInfoBar extends Component {
      
             </div>
             <div className="col pull-right">
-              <h6 class="text-black text-right">Since {(companyInfo)?  companyInfo.companyEst:''}</h6>
+              <h6 class="text-black text-right">Since {(companyInfo)? moment(companyInfo.companyEst).format('ddd D MMM YYYY') :''}</h6>
      
             </div>
      </div>
 
-
+      <Hr></Hr>
     </div>
      
     </ContainerFluid>

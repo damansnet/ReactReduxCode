@@ -6,6 +6,7 @@ import EmployeeHeader from './employeeheader';
 import styled from 'styled-components';
 import EmployeeCardView from './employeecardview';
 import EmployeeDetails from './employeedetails';
+import _ from 'lodash';
 const ImagePlaceholder= styled.div`
   
   float:left;
@@ -28,7 +29,8 @@ export class EmployeeListing extends Component {
           const{employees,fetchEmployees}=nextProps; 
           if(employees!==undefined && fetchEmployees===false)
           {
-              this.setState({employees});
+             let employeeReceived=_.cloneDeep(employees); 
+             this.setState({employees,employeeReceived});
               this.props.getEmployeesCompleted();
               this.props.companyInfo(employees.companyInfo);
               return;
@@ -43,12 +45,22 @@ export class EmployeeListing extends Component {
      hideModal=()=>{
          this.setState({show:!this.state.show});
      };
+     onSearch=(searchQuery)=>{
+         let tempEmployees=this.state.employeeReceived.employees;
+         tempEmployees= tempEmployees.filter(x=>{
+             if(x.firstName.toUpperCase().indexOf(searchQuery.toUpperCase())===0)
+             {
+                 return x;
+             }
+         } );
+         this.setState({employees:tempEmployees});
+     };
     render(){
         const {employees,show,selectedEmployee,companyInfo}=this.state;
         console.log(employees);
          return( <div className="container-fluid">
                  <div className="row">
-            <EmployeeHeader></EmployeeHeader>
+            <EmployeeHeader onSearch={this.onSearch}></EmployeeHeader>
             <hr/>
             </div>
             <EmployeeCardView data={employees} selectEmployee={this.selectedEmployee} ></EmployeeCardView>

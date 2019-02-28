@@ -26,6 +26,14 @@ export class EmployeeHeader extends Component {
           }
        console.log(nextProps);  
     }
+    onChange=(event)=>{
+        console.log(event.target.value);
+        if(event.target.value.length>3)
+        {
+            this.props.onSearch(event.target.value);
+        }
+    };
+
     render(){
         const {employees}=this.props.employees;
         console.log(employees);
@@ -34,12 +42,12 @@ export class EmployeeHeader extends Component {
           <div className="col">
           <p className="text-left"><h3> Our Employees</h3></p>
           </div>
-          <div className="col">
+          <div className="col text-right">
           <span>Sorty by</span>
-          <span className="text-right">dropdowncomes here</span>
+          <span >dropdowncomes here</span>
           </div>
           <div className="col">
-          <p className="text-right"> <input type='text' placeholder="search"></input>  </p>
+          <p className="text-right"> <input type='text' placeholder="search" onChange={this.onChange} ></input>  </p>
           </div>
          </div>
       </div>);

@@ -7,6 +7,9 @@ const ImagePlaceholder= styled.div`
   
   float:left;
 `;
+const BioText=styled.p`
+text-overflow:ellipsis;
+`;
 
 export class EmployeeCardView extends Component {
 
@@ -36,7 +39,7 @@ export class EmployeeCardView extends Component {
                    </ImagePlaceholder>
                     
                     <h4 className="card-title"><b>{selectEmployee.firstName} {selectEmployee.lastName}</b></h4>
-                    <p className="card-text">{selectEmployee.bio}</p>
+                    <BioText>{selectEmployee.bio}</BioText>
                     
                 </div>
             </div>
