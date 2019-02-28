@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from "styled-components";
+import * as employeeActions from '../actions/action';
 import Container from '../../layouts/Container';
 import Header from '../../layouts/Container';
 import EmployeeListing from '../employees/employeeslist';
-import moment from 'moment'
+import moment from 'moment';
+import _ from 'lodash';
 const ContainerFluid = styled.div`
 
 `;
+
 
 const NavBarHeader = styled.header`
 
@@ -36,55 +39,98 @@ export class CompanyInfoBar extends Component {
         this.showCompanyInfo=this.showCompanyInfo.bind(this);
     }
     componentWillMount() {
-      
+        this.props.getEmployees();
       }
       componentWillUpdate(nextProps) {
-      
+        const{employees,fetchEmployees}=nextProps; 
+        if(employees!==undefined && fetchEmployees===false)
+        {
+           let employeeReceived=_.cloneDeep(employees); 
+           this.setState({employees,employeeReceived});
+            this.props.getEmployeesCompleted();
+            this.showCompanyInfo(employees.companyInfo);
+            return;
+        }
+     console.log(nextProps); 
     }
     showCompanyInfo(companyInfo){
         this.setState({companyInfo});
     }
+
+    onSortChange=(sortSelection)=>{
+        debugger;
+        let tempEmployees=_.cloneDeep(this.state.employeeReceived);
+       
+        let filterEmployees=_.orderBy(tempEmployees.employees,sortSelection.value,'asc');
+       
+        tempEmployees.employees=filterEmployees;
+        this.setState({employees:tempEmployees});
+
+    };
+
+    onSearch=(searchQuery)=>{
+      
+        let tempEmployees=_.cloneDeep(this.state.employeeReceived);
+        if(searchQuery==="")
+        {
+            this.setState({employees:tempEmployees});
+            return;
+        }
+       
+
+        let filterEmployees= tempEmployees.employees.filter(x=>{
+            if((x.firstName.toUpperCase().indexOf(searchQuery.toUpperCase())===0)||(x.lastName.toUpperCase().indexOf(searchQuery.toUpperCase())===0))
+            {
+                return x;
+            }
+        } );
+        tempEmployees.employees=filterEmployees;
+        this.setState({employees:tempEmployees});
+    };
+
     render(){
-        const{companyInfo}=this.state;
+        
+        const {employees,show,selectedEmployee,companyInfo}=this.state;
+        const {fetchEmployees}=this.props;
         return(<div>
             <Header>
            <ContainerFluid>
 
-  <div className="container-fluid">
-     <div className="row">
-     <div className="col">
+  <ContainerFluid className="container-fluid">
+     <ContainerFluid className="row">
+     <ContainerFluid className="col">
               <h1 className="text-black  text-left">{(companyInfo)?companyInfo.companyName:''}</h1>
      
-            </div>
-     </div>
-     <div className="row">
-     <div className="col">
+            </ContainerFluid>
+     </ContainerFluid>
+     <ContainerFluid className="row">
+     <ContainerFluid className="col">
               <h6 class="text-black text-left">{(companyInfo)?companyInfo.companyMotto:''}</h6>
      
-            </div>
-            <div className="col pull-right">
+            </ContainerFluid>
+            <ContainerFluid className="col pull-right">
               <h6 class="text-black text-right">Since {(companyInfo)? moment(companyInfo.companyEst).format('ddd D MMM YYYY') :''}</h6>
      
-            </div>
-     </div>
+            </ContainerFluid>
+     </ContainerFluid>
 
       <Hr></Hr>
-    </div>
+    </ContainerFluid>
      
     </ContainerFluid>
     </Header>
      <Container>
          
-     <EmployeeListing companyInfo={this.showCompanyInfo} ></EmployeeListing>
+     <EmployeeListing data={employees} fetchEmployees={fetchEmployees} onSearch={this.onSearch} sortHandle={this.onSortChange} ></EmployeeListing>
      
      </Container></div>
         );
     }
 }
-// export const mapStateToProps = state => {
-//     const { employees,fetchEmployees } = state.form;
-//     return {
-//      employees,fetchEmployees
-//     };
-//   };
-export default CompanyInfoBar;
+export const mapStateToProps = state => {
+    const { employees,fetchEmployees } = state.form;
+    return {
+     employees,fetchEmployees
+    };
+  };
+export default connect(mapStateToProps,employeeActions)(CompanyInfoBar);
