@@ -28,6 +28,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "json-loader": "^0.5.7",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "react-bootstrap4-modal": "^1.7.0",
